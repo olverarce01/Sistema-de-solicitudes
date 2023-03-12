@@ -26,10 +26,10 @@ Se presenta información correspondiente a una solicitud
 Se permite cambiar estado a la solicitud por parte del administrador
 ![EstadoSolicitud!](https://raw.githubusercontent.com/olverarce01/Sistema-de-solicitudes/main/images/vistaEstadoSolicitud.png "vistaEstadoSolicitud")
 ## Tecnologías
-**Node JS:** Entorno de ejecucción para el lenguaje Javascript.
-**Express:** Crear servidor web y rutas.
-**Pasport:** Encriptar las contraseñas por hashing y roundSalt.
-**EJS:** Motor de plantilla.
-**HTML, CSS, Javascript, Bootstrap 5:** Frontend.
-**MongoDB con mongoose:** Sistema administrador de base de datos.
+- **Node JS:** Entorno de ejecucción para el lenguaje Javascript.
+- **Express:** Crear servidor web y rutas.
+- **Pasport:** Encriptar las contraseñas por hashing y roundSalt.
+- **EJS:** Motor de plantilla.
+- **HTML, CSS, Javascript, Bootstrap 5:** Frontend.
+- **MongoDB con mongoose:** Sistema administrador de base de datos.
 
