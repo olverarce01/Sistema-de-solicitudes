@@ -1,0 +1,109 @@
+<%- include('partials/header.ejs') -%>
+
+<a class="nav-link d-none d-sm-block d-sm-none d-md-block" href="/calendario">Calendario</a>
+
+<% if(dataUser.role == 'requester'){%>
+<a class="nav-link" href="/solicitar">Solicitar apoyo</a>
+<%}%>
+
+<form class="form-inline my-2 my-lg-0">
+		<span class="my-auto"><%= dataUser.nickname%></span> &nbsp;
+		<img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" class="img-thumbnail rounded-circle" style="width:50px;height: 50px;">
+</form>	
+<a class="nav-link" href="/logout">Cerrar sesión</a>
+
+</div>
+</div>
+</div>
+</nav>
+
+
+<main>
+	<div class="mx-auto w-50">
+		<div>
+			<!-- <p>id: <%= solicitud.id%></p> -->
+			<p class="text-center"><b>Datos Evento</b> <i class="fa-solid fa-calendar"></i> </p>
+			<p><b>Evento:</b> <%= solicitud.nombreEvento%></p>
+			<p><b>Fecha evento:</b> <%= solicitud.dateEvento.toLocaleDateString('en-GB')%></p>
+			<p><b>Horario:</b> <%= solicitud.horario%></p>
+			<p><b>Centro de Costos:</b> <%= solicitud.centroCostos%></p>	
+		</div>
+		<p class="text-center"><b>Datos Solicitante</b> <i class="fa-solid fa-user-tie"></i></p>
+		<p><b>Rut:</b> <%= solicitud.rut%></p>
+		<p><b>Nombre:</b> <%= solicitud.nickname%></p>
+		<p><b>Departamento:</b> <%= solicitud.deparment%></p>
+		<p><b>Correo:</b> <%= solicitud.username%></p>
+		<p><b>Telefono:</b> <%= solicitud.telephone%></p>	
+		<p><b>Recursos:</b></p>	
+		<ul>
+			<% solicitud.sources.forEach(source=>{ %>
+				<li> <%= source %> </li>
+			<% }) %>
+		</ul>
+		
+
+		<p><b>Estado de la solicitud: </b>
+		<% if(solicitud.status == 'No revisada'){ %>
+			<span class="badge text-bg-primary"> <%= solicitud.status%> </span>
+			<% }else if(solicitud.status == 'En proceso'){ %>
+			<span class="badge text-bg-secondary"> <%= solicitud.status%> </span>
+			<% }else if(solicitud.status == 'Incorrecta'){ %>
+			<span class="badge text-bg-success"> <%= solicitud.status%> </span>
+			<% }else if(solicitud.status == 'Incompleta'){ %>
+			<span class="badge text-bg-danger"> <%= solicitud.status%> </span>
+			<% }else if(solicitud.status == 'Revisada'){ %>
+			<span class="badge text-bg-warning"> <%= solicitud.status%> </span>
+			<% } %>
+		</p>
+		
+		</p>
+		<% if(dataUser.role == 'admin'){%>
+			<button type="button" class="btn btn-outline-dark mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+				Actualizar estado de solicitud
+			</button>
+	
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Seleccione el nuevo estado de la solicitud</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<form action="/solicitud/<%= solicitud.id%>/estado" method="post">
+								<button class="btn btn-outline-primary m-1" value="No revisada" name="estado">No revisada</button>
+								<i> La solicitud no ha sido revisada aún</i>
+							</form>
+							<form action="/solicitud/<%= solicitud.id%>/estado" method="post">
+								<button class="btn btn-outline-secondary m-1" value="En proceso" name="estado">En proceso</button>
+								<i> La solicitud se esta revisando</i>
+							</form>
+							<form action="/solicitud/<%= solicitud.id%>/estado" method="post">
+								<button class="btn btn-outline-success m-1" value="Incorrecta" name="estado">Incorrecta</button>
+								<i> La solicitud contiene datos incorrectos</i>
+							</form>
+							<form action="/solicitud/<%= solicitud.id%>/estado" method="post">
+								<button class="btn btn-outline-danger m-1" value="Incompleta" name="estado">Incompleta</button>
+								<i> La solicitud no contiene ciertos datos</i>
+							</form>
+							<form action="/solicitud/<%= solicitud.id%>/estado" method="post">
+								<button class="btn btn-outline-warning m-1" value="Revisada" name="estado">Revisada</button>
+								<i> La solicitud no ha sido revisada</i>
+							</form>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+							<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		<%}%>
+	
+	</div>		
+
+</main>
+
+
+<%- include('partials/footer.ejs') -%>

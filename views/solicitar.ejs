@@ -1,0 +1,188 @@
+<%- include('partials/header.ejs') -%>
+
+<a class="nav-link d-none d-sm-block d-sm-none d-md-block" href="/calendario">Calendario</a>
+<a class="nav-link" href="/solicitar">Solicitar apoyo</a>
+
+<form class="form-inline my-2 my-lg-0">
+		<span class="my-auto"><%= infoUser.nickname %></span> &nbsp;
+		<img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" class="img-thumbnail rounded-circle" style="width:50px;height: 50px;">
+</form>		
+<a class="nav-link" href="/logout">Cerrar sesión</a>
+
+</div>
+</div>
+</div>
+</nav>
+
+<main>
+	<form action="/solicitar" method="post" class="py-5">
+	  <p class="text-center">Formulario de solicitud</p>
+		<div class="row">
+			<div class="col-12 col-lg-6">
+				<p class="text-center">Datos Evento</p>
+				<div class="mb-3">
+					<label for="nombreEvento" class="form-label">Nombre evento</label>
+					<input type="text" class="form-control" id="nombreEvento" name="nombreEvento" autocomplete="off">
+				</div>
+				<div class="mb-3">
+					<label for="dateEvento" class="form-label">Fecha Evento</label>
+					<input type="date" class="form-control" id="dateEvento" name="dateEvento">
+				</div>
+				<div class="mb-3">
+					<label for="horario" class="form-label">Horario</label>
+					<input type="time" class="form-control" id="horaio" name="horario">
+				</div>
+				<div class="mb-3">
+					<label for="centroCostos" class="form-label">Centro de costos</label>
+					<select class="form-control" id="centroCostos" name="centroCostos">
+						<option value="Campus Saucache - Ingenieria">Campus Saucache - Ingenieria </option>
+						<option value="Campus Saucache - Matematica">Campus Saucache - Matematica </option>
+						<option value="Campus Saucache - Fisica">Campus Saucache - Fisica </option>
+					</select>
+				</div>
+			</div>
+			<div class="col-12 col-lg-6">
+				<p class="text-center">Datos Solicitante</p>
+				<div class="mb-3">
+					<label for="rutSolicitante" class="form-label">Rut</label>
+					<input type="text" class="form-control" value="<%= infoUser.rut %>" id="rutSolicitante" name="rutSolicitante" readonly>
+				</div>
+				<div class="mb-3">
+					<label for="nombreSolicitante" class="form-label">Nombre</label>
+					<input type="text" class="form-control" value="<%= infoUser.nickname %>" id="nombreSolicitante" name="nombreSolicitante" autocomplete="off" readonly>
+				</div>
+				<div class="mb-3">
+					<label for="departamentoSolicitante" class="form-label">Departamento</label>
+					<input type="text" class="form-control" value="<%= infoUser.department %>" id="departamentoSolicitante" name="departamentoSolicitante" autocomplete="off" readonly>
+				</div>
+				<div class="mb-3">
+					<label for="correoSolicitante" class="form-label">Correo</label>
+					<input type="text" class="form-control" value="<%= infoUser.username %>" id="correoSolicitante" name="correoSolicitante" autocomplete="off" readonly>
+				</div>
+				<div class="mb-3">
+					<label for="telefonoSolicitante" class="form-label">Telefono</label>
+					<input type="text" class="form-control" value="<%= infoUser.telephone %>" id="telefonoSolicitante" name="telefonoSolicitante" autocomplete="off" readonly>
+				</div>
+		
+			</div>
+		</div>
+
+		<p class="text-center">Recursos a solicitar</p>
+		<div class="form-check my-3">
+			<div class="row">
+				<div class="col-lg-3">
+					<p><b>Apoyo audiovisual</b></p>
+					<div>
+						<input class="form-check-input" type="checkbox" value="microphone" name="recurso" id="microphone">
+						<label class="form-check-label" for="microphone">
+							Micrófono
+						</label>	
+					</div>
+					<div>
+						<input class="form-check-input" type="checkbox" value="amplificador" name="recurso" id="amplificador">
+						<label class="form-check-label" for="amplificador">
+							Amplificador
+						</label>		
+					</div>
+					<div>
+						<input class="form-check-input" type="checkbox" value="puntero-laser" name="recurso" id="puntero-laser">
+						<label class="form-check-label" for="puntero-laser">
+							Puntero Laser
+						</label>		
+					</div>
+					<div>
+						<input class="form-check-input" type="checkbox" value="grabacion-audio" name="recurso" id="grabacion-audio">
+						<label class="form-check-label" for="grabacion-audio">
+							Grabación de Audio
+						</label>		
+					</div>
+	
+				</div>
+				<div class="col-lg-3">
+					<p><b>Canales de difusión</b></p>
+					<div>
+						<input class="form-check-input" type="checkbox" value="radio-uta" name="recurso" id="radio-uta">
+						<label class="form-check-label" for="radio-uta">
+							Radio UTA
+						</label>	
+					</div>
+					<div>
+						<input class="form-check-input" type="checkbox" value="pagina-web" name="recurso" id="pagina-web">
+						<label class="form-check-label" for="pagina-web">
+							Página Web
+						</label>		
+					</div>
+					<div>
+						<input class="form-check-input" type="checkbox" value="facebook-uta" name="recurso" id="facebook-uta">
+						<label class="form-check-label" for="facebook-uta">
+							Facebook UTA
+						</label>		
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<p><b>Elencos artísticos</b></p>
+					<div>
+						<input class="form-check-input" type="checkbox" value="bafut" name="recurso" id="bafut">
+						<label class="form-check-label" for="bafut">
+							BAFUT
+						</label>	
+					</div>
+					<div>
+						<input class="form-check-input" type="checkbox" value="cinut" name="recurso" id="cinut">
+						<label class="form-check-label" for="cinut">
+							CINUT
+						</label>	
+					</div>
+					<div>
+						<input class="form-check-input" type="checkbox" value="tuna" name="recurso" id="tuna">
+						<label class="form-check-label" for="tuna">
+							TUNA
+						</label>	
+					</div>
+					<div>
+						<input class="form-check-input" type="checkbox" value="coro" name="recurso" id="coro">
+						<label class="form-check-label" for="coro">
+							CORO
+						</label>	
+					</div>
+					<div>
+						<input class="form-check-input" type="checkbox" value="teatro" name="recurso" id="teatro">
+						<label class="form-check-label" for="teatro">
+							TEATRO
+						</label>	
+					</div>
+
+				</div>	
+				<div class="col-lg-3">
+					<p><b>Auditorios</b></p>
+					<div>
+						<input class="form-check-input" type="checkbox" value="manuel-pinto" name="recurso" id="manuel-pinto">
+						<label class="form-check-label" for="manuel-pinto">
+							Manuel Pinto
+						</label>	
+					</div>
+					<div>
+						<input class="form-check-input" type="checkbox" value="ricardo-salas" name="recurso" id="ricardo-salas">
+						<label class="form-check-label" for="ricardo-salas">
+							Ricardo Salas
+						</label>	
+					</div>
+					<div>
+						<input class="form-check-input" type="checkbox" value="centenario" name="recurso" id="centenario">
+						<label class="form-check-label" for="centenario">
+							Centenario
+						</label>	
+					</div>
+
+				</div>	
+			</div>
+
+		</div>			
+		<div class="text-center">
+			<button type="submit" class="btn btn-outline-dark mx-auto">Solicitar</button>
+		</div>
+
+	</form>	
+</main>
+
+<%- include('partials/footer.ejs') -%>

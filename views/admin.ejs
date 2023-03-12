@@ -1,0 +1,103 @@
+<%- include('partials/header.ejs') -%>
+
+<a class="nav-link d-none d-sm-block d-sm-none d-md-block" href="/calendario">Calendario</a>
+<form class="form-inline my-2 my-lg-0">
+	<span class="my-auto"><%= username %></span> &nbsp;
+	<img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" class="img-thumbnail rounded-circle" style="width:50px;height: 50px;">
+</form>
+	<a class="nav-link" href="/logout">Cerrar sesión</a>
+
+</div>
+</div>
+</div>
+</nav>
+
+<main>
+	<p class="text-center"><b>Administracion Solicitudes</b></p>
+	<div class="row">
+		<div class="col-lg-6 d-none d-sm-block d-sm-none d-md-block">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="chart-container" style="position: relative; height:40vh; width:60vw">
+						<canvas id="doughnutSolicitudes"></canvas>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="chart-container" style="position: relative; height:40vh; width:60vw">
+						<canvas id="radarDepartamentos"></canvas>
+					</div>					
+				</div>
+				<div class="col-12">
+					<div class="chart-container" style="position: relative; height:40vh; width:60vw">
+						<canvas id="barSolicitudes"></canvas>
+					</div>					
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6 mx-auto">
+			<div class="table-responsive">
+				<table id="tabla-solicitudes" class="table table-sm">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col"><i class="fa-solid fa-user"></i> rut</th>
+							<th scope="col"><i class="fa-solid fa-clock"></i> horario</th>
+							<th scope="col"><i class="fa-solid fa-calendar-day"></i> Fecha Evento</th>
+							<th scope="col"> Estado </th>
+							<th scope="col"> Acciones</th>
+						</tr>
+					</thead>
+						<tbody>
+				<% solicitudes.forEach(function(solicitud,index){ %>
+							<tr>
+								<th scope="row"><%= index+1%></th>
+								<td>  <%= solicitud.solicitudUser.rut %> </td>
+								<td>  <%= solicitud.solicitudEvento.horario %> </td>
+								<td>  <%= solicitud.solicitudEvento.dateEvento.toLocaleDateString('en-GB') %> </td>
+								<td> 
+									
+									<% if(solicitud.status == 'No revisada'){ %>
+										<h5><span class="badge text-bg-primary"> <%= solicitud.status%> </span></h5>
+										<% }else if(solicitud.status == 'En proceso'){ %>
+										<h5><span class="badge text-bg-secondary"> <%= solicitud.status%> </span></h5>
+										<% }else if(solicitud.status == 'Incorrecta'){ %>
+											<h5><span class="badge text-bg-success"> <%= solicitud.status%> </span></h5>
+										<% }else if(solicitud.status == 'Incompleta'){ %>
+											<h5><span class="badge text-bg-danger"> <%= solicitud.status%> </span></h5>
+										<% }else if(solicitud.status == 'Revisada'){ %>
+											<h5><span class="badge text-bg-warning"> <%= solicitud.status%> </span></h5>
+										<% } %>			
+								<td>   				  
+										<a href="/solicitud/<%= solicitud._id %>" class="btn btn-primary m-2"> ver </a>		  	
+										<form action="/eliminar/" method="post" class="form-inline my-2">
+											<button type="submit" class="btn btn-danger" name="id" value="<%= solicitud._id%>">
+												Eliminar
+											</button>
+										</form>	
+								</td>
+							</tr>
+					<% }); %>
+					</tbody>
+				</table>		
+			</div>
+		</div>
+	</div>	
+</main>
+
+<script>
+	$(document).ready( function () {
+    $('#tabla-solicitudes').DataTable({
+			language: {
+        url: '//cdn.datatables.net/plug-ins/1.13.3/i18n/es-ES.json',
+    }
+		});
+} );
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/charts/doughnutSolicitudes.js"></script>
+<script src="/charts/radarDepartamentos.js"></script>
+<script src="/charts/barSolicitudes.js"></script>
+
+
+<%- include('partials/footer.ejs') -%>
