@@ -30,8 +30,9 @@ app.use(passport.session());
 
 //connection
 mongoose.set('strictQuery',false);
-mongoose.connect('mongodb://localhost:27017/solicitudDB',{useNewUrlParser:true});
+mongoose.connect(process.env.MONGO,{useNewUrlParser:true});
 
+// 'mongodb://localhost:27017/solicitudDB'
 
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
@@ -73,8 +74,8 @@ app.post('/eliminar/', postEliminarSolicitud);
 app.get('/logout', getLogOut);
 
 //listening on port 3000
-app.listen(3000, function(){
-	console.log('running in port 3000')
+app.listen(process.env.PORT || 3000, function(){
+	console.log('running in port', process.env.PORT || 3000)
 });
 
 
