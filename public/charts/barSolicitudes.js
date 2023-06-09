@@ -15,7 +15,7 @@ var borderColors = ['rgb(255, 99, 132)',
 'rgb(153, 102, 255)',
 'rgb(201, 203, 207)']
 
-fetch('http://localhost:3000/admin/dataBar')
+fetch('https://sistema-de-solicitudes-production.up.railway.app/admin/dataBar')
   .then(response => response.json())
   .then(data => {
   data.sort((monthA,monthB)=>{

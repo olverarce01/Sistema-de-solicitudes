@@ -1,4 +1,4 @@
-fetch('http://localhost:3000/admin/dataRadial')
+fetch('https://sistema-de-solicitudes-production.up.railway.app/admin/dataRadial')
   .then(response => response.json())
   .then(data => {
   let myLabels = [];
