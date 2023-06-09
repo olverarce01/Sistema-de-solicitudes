@@ -42,16 +42,25 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 
-// User.register({rut: '20.355.445-0', nickname: 'Luis Perez', department: 'Matematica',username: 'luisperez01@gmail.com', telephone: '907804503', role: 'requester'},'12345',function(err,user){
-// 	if(err){console.log(err)}else{
-// 		console.log('user register');
-// 	}
-// })
 
 //utils
 app.set('view engine','ejs');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'));
+
+app.get('/usuariosPrueba', function(req,res){
+	User.register({rut: '20.355.445-0', nickname: 'Olver', department: 'Matematica',username: 'olverarce01@gmail.com', telephone: '907804503', role: 'requester'},'12345',function(err,user){
+		if(err){console.log(err)}else{
+			console.log('user register');
+		}
+	})
+	User.register({rut: '20.355.446-0', nickname: 'Admin', department: 'Matematica',username: 'arceolver01@gmail.com', telephone: '907804503', role: 'admin'},'12345',function(err,user){
+		if(err){console.log(err)}else{
+			console.log('user register');
+		}
+	})
+	
+});
 
 //routes
 app.get('/', getHome);
